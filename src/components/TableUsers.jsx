@@ -46,8 +46,8 @@ const TableUsers = ({setSelectedIds, changesCount}) => {
     };
 
 
-    function getUsers() {
-        const response =  axios.get('https://task4-users-mysql.herokuapp.com/getusers');
+    async function getUsers() {
+        const response = await axios.get('https://task4-users-mysql.herokuapp.com/getusers');
         if (response.data.length > 0){
             const results= response.data.map(row => ({
                 key: row.id,
