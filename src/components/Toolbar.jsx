@@ -18,8 +18,9 @@ const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
                };
                if (response.data.message) {
                    setChangesCount(++changesCount);
-                   let currentId = localStorage.getItem('id');
-                   if (selectedIds.filter(id => id === currentId))  {
+                   let currentId = Number(localStorage.getItem('id'));
+                   debugger;
+                   if (selectedIds.filter(id => id === currentId).length === 1)  {
                        setIsAuth(false);
                    };
                };
@@ -50,8 +51,8 @@ const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
             if (response.data.message) {
                 setChangesCount(++changesCount);
                 alert(response.data.message);
-                let currentId = localStorage.getItem('id');
-                if (selectedIds.filter(id => id === currentId))  {
+                let currentId = Number(localStorage.getItem('id'));
+                if (selectedIds.filter(id => id === currentId).length === 1)  {
                     setIsAuth(false);
                 };
             };

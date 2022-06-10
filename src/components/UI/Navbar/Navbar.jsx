@@ -35,7 +35,7 @@ const Navbar = () => {
                 >
                 Registration
                 </MyButton>
-            };
+            }
         </div>
     );
 };
