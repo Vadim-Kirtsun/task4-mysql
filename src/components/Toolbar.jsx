@@ -19,7 +19,6 @@ const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
                if (response.data.message) {
                    setChangesCount(++changesCount);
                    let currentId = Number(localStorage.getItem('id'));
-                   debugger;
                    if (selectedIds.filter(id => id === currentId).length === 1)  {
                        setIsAuth(false);
                    };
