@@ -9,20 +9,24 @@ import {AuthContext} from "../context";
 const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
     const {setIsAuth} = useContext(AuthContext);
 
+    function logoutCurrentUserIfExistInSelectedIds() {
+        let currentId = Number(localStorage.getItem('id'));
+        if (selectedIds.filter(id => id === currentId).length === 1) {
+            setIsAuth(false);
+        }
+    }
+
     const blockUser = () => {
            Axios.put('https://task4-users-mysql.herokuapp.com/block', {
                selectedIds: selectedIds
            }).then((response) => {
                if (response.data.err) {
                    console.log(response.data.err);
-               };
+               }
                if (response.data.message) {
                    setChangesCount(++changesCount);
-                   let currentId = Number(localStorage.getItem('id'));
-                   if (selectedIds.filter(id => id === currentId).length === 1)  {
-                       setIsAuth(false);
-                   };
-               };
+                   logoutCurrentUserIfExistInSelectedIds();
+               }
            });
     };
 
@@ -32,11 +36,11 @@ const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
         }).then((response) => {
             if (response.data.err) {
                 console.log(response.data.err);
-            };
+            }
             if (response.data.message) {
                 setChangesCount(++changesCount);
                 alert(response.data.message);
-            };
+            }
         });
     };
 
@@ -46,15 +50,12 @@ const Toolbar = ({selectedIds, setChangesCount, changesCount}) => {
         }).then((response) => {
             if (response.data.err) {
                 console.log(response.data.err);
-            };
+            }
             if (response.data.message) {
                 setChangesCount(++changesCount);
                 alert(response.data.message);
-                let currentId = Number(localStorage.getItem('id'));
-                if (selectedIds.filter(id => id === currentId).length === 1)  {
-                    setIsAuth(false);
-                };
-            };
+                logoutCurrentUserIfExistInSelectedIds();
+            }
         });
     };
 
